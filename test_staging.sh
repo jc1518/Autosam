@@ -58,38 +58,12 @@ add_spoof_host()
 {
 	echo ""
 	echo "Spoofing host file to test staging"
-	STAGINGHOST=$(dig +short www.prod.edn.news.com.au.edgesuite-staging.net | sort | head -1)
-	STAGINGHOST_homelife=$(dig +short www.homelife.com.au.edgesuite-staging.net | sort | head -1)
-	STAGINGHOST_insideout=$(dig +short www.insideout.com.au.edgesuite-staging.net | sort | head -1)
-	STAGINGHOST_delicious=$(dig +short www.delicious.com.au.edgesuite-staging.net | sort | head -1)
 	sudo bash -c "echo '###spoofing_start###' >> /etc/hosts"
-	# Regionals
-	sudo bash -c "echo $STAGINGHOST	www.geelongadvertiser.com.au >> /etc/hosts"
-	sudo bash -c "echo $STAGINGHOST www.ntnews.com.au >> /etc/hosts"
-	sudo bash -c "echo $STAGINGHOST	www.themercury.com.au >> /etc/hosts"
-	sudo bash -c "echo $STAGINGHOST	www.cairnspost.com.au >> /etc/hosts"
-	sudo bash -c "echo $STAGINGHOST	www.goldcoastbulletin.com.au >> /etc/hosts"
-	sudo bash -c "echo $STAGINGHOST	www.townsvillebulletin.com.au >> /etc/hosts"
-	sudo bash -c "echo $STAGINGHOST	www.weeklytimesnow.com.au >> /etc/hosts"
-	# Mastheads
-	sudo bash -c "echo $STAGINGHOST	www.adelaidenow.com.au >> /etc/hosts"
-	sudo bash -c "echo $STAGINGHOST	www.couriermail.com.au >> /etc/hosts"
-	sudo bash -c "echo $STAGINGHOST	www.dailytelegraph.com.au >> /etc/hosts"
-	sudo bash -c "echo $STAGINGHOST	www.foxsports.com.au >> /etc/hosts"
-	sudo bash -c "echo $STAGINGHOST www.heraldsun.com.au >> /etc/hosts"
-	sudo bash -c "echo $STAGINGHOST	www.news.com.au >> /etc/hosts"
-	sudo bash -c "echo $STAGINGHOST www.perthnow.com.au >> /etc/hosts"
-	sudo bash -c "echo $STAGINGHOST www.theaustralian.com.au >> /etc/hosts"
-    # Homelife
-    sudo bash -c "echo ${STAGINGHOST_homelife}  www.homelife.com.au >> /etc/hosts"
-    sudo bash -c "echo ${STAGINGHOST_homelife}  cdn.homelife.com.au >> /etc/hosts"
-    sudo bash -c "echo ${STAGINGHOST_homelife}  forums.homelife.com.au >> /etc/hosts"
-    sudo bash -c "echo ${STAGINGHOST_homelife}  blogs.homelife.com.au >> /etc/hosts"
-	# Insideout
-    sudo bash -c "echo ${STAGINGHOST_insideout}  www.insideout.com.au >> /etc/hosts"
-    sudo bash -c "echo ${STAGINGHOST_insideout}  cdn.insideout.com.au >> /etc/hosts"
-	# Delicious
-    sudo bash -c "echo ${STAGINGHOST_delicious}  www.delicious.com.au >> /etc/hosts"
+	for MYSITE in `echo $MYSITES | tr ';' '\n'`
+	do
+		STAGINGHOST=$(dig +short $(dig +short CNAME $MYSITE | sed 's/.net./-staging.net/g') | sort | head -1)
+		sudo bash -c "echo $STAGINGHOST $MYSITE >> /etc/hosts"
+	done
 	sudo bash -c "echo '###spoofing_end###' >> /etc/hosts"
 	sleep 3
 }
