@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-echo "Running Autosam Version 2 at" `date`
+echo "Autosam works at" `date +%Y-%m-%d-%H:%M`
 echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 echo ""
 
