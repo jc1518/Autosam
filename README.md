@@ -18,34 +18,34 @@ Autosam treats every redirect as a job. And job has different status in its life
 ![lifecycle](design/redirect_job_lifecycle.png)  
     
 ##Setup
-1. Clone project.  
-```bash
+* Clone project.  
+..```bash
 git clone https://github.com/jc1518/Autosam.git
 ```
-2. Install dependencies. 
-* Cloudlets python module requires [edgegrid](https://github.com/akamai-open/AkamaiOPEN-edgegrid-python)
+* Install dependencies. 
+- Cloudlets python module requires [edgegrid](https://github.com/akamai-open/AkamaiOPEN-edgegrid-python)
 ```bash
 pip install edgegrid-python
 ```
-* jq 
+- jq 
 ```bash
 sudo apt-get -y install jq
 or 
 sudo yum -y install jq
 ``` 
-3. Create a AWS DynamoDB table for storing your job status.  
+* Create a AWS DynamoDB table for storing your job status.  
 
-4. Create Cloudlets configs and associte them to properties. Ensure you follow a good naming convention. e.g www.jackiechen.org use www_jackiechen_prod as the Cloudlets config name. If you do it different, you have to update line 200 in autosam_v2.sh to fit your case.
+* Create Cloudlets configs and associte them to properties. Ensure you follow a good naming convention. e.g www.jackiechen.org use www_jackiechen_prod as the Cloudlets config name. If you do it different, you have to update line 200 in autosam_v2.sh to fit your case.
 ```bash
 POLICYNAME=$(echo "$JOB" | cut -d' ' -f1 | cut -d'/' -f3 | cut -d'.' -f1-2 | t    r '.' '_')"_prod"
 ```      
-5. Setup your credentials in the [config](config) file, you need credentials for both Cloudlets API and AWS DynamoDB API calls. Also replace sample value with your Akamai Group ID, email address, sites ... 
+* Setup your credentials in the [config](config) file, you need credentials for both Cloudlets API and AWS DynamoDB API calls. Also replace sample value with your Akamai Group ID, email address, sites ... 
 
 ##Usage
 Autosam supports two methods of submitting redirect jobs.
 * Slack bot
 This requires to create a hubot and integrate it into Slack. The code can be found in myHubot repo. [lib/autosam.js](https://github.com/jc1518/myhubot/blob/master/lib/autosam.js) and [scripts/autosam.js](https://github.com/jc1518/myhubot/blob/master/scripts/autosam.js)
-[autosam_bot](design/autosam_bot.png)
+![autosam_bot](design/autosam_bot.png)
 
 * Text file
 This a simple mode, just add all your redirects in a text file, one redirect per line. Then give it to autosam to process.
