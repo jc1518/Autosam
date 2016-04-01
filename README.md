@@ -46,8 +46,23 @@ This requires to create a hubot and integrate it into Slack. The code can be fou
 * Text file    
 This a simple mode, just add all your redirects in a text file, one redirect per line. Then give it to autosam to process.
 ```bash
+# for adding new redirects
 ./autosam_v2.sh <file>
+
+# for testing  
+./test_staging.sh  
+./test_production.sh  
 ```  
+##Best practice
+As Akamai takes a long time to propagate the configuration changes, it is a good idea to consolidate as many redirects as possible into one go. In my environment, I created a cron job to run every 30 minutes. And users submit the redirect jobs via talking to the Slack bot that is shown above.    
+```bash
+0,30 08-17 * * 1-5 cd /home/autosam/cloudlets; ./all-in-one.sh >> log
+```
+Akamai may deny your API call if the time in your machine is not correct. The best way to avoid that is to adjust your time before executing autosam. Here is a command you can use:
+```bash
+sudo date -s "$(curl -sD - google.com | grep '^Date:' | cut -d' ' -f3-6)Z"
+```
+
 ##Redirect types
 Autosam supports both basic URL redirects and URL with query string. This can be extended to support more types in the [Cloudlets module](https://github.com/jc1518/Autosam/blob/master/Cloudlets/__init__.py)
 
