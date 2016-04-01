@@ -1,0 +1,27 @@
+# Cloudlets API credentials
+export CLD_BASEURL='https://akab-xxxxxxxxxxxxxxxxxxxxxxxxxxxx.luna.akamaiapis.net'
+export CLD_CLIENTTOKEN='akab-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+export CLD_CLIENTSECRET='fbxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+export CLD_ACCESSTOKEN='akab-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+
+# AWS credentials
+export AWS_ACCESS_KEY_ID='AKXXXXXXXXXXXXXX'
+export AWS_SECRET_ACCESS_KEY='0ujfxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+export AWS_DEFAULT_REGION='ap-southeast-2'
+export AWS_DEFAULT_OUTPUT='json'
+
+# DynamoDB table name
+export JOB_QUEUE='cloudlets-redirects'
+
+# Akamai Group ID
+export GROUP_ID='51000'
+
+# Python version
+export MYPYTHON='python2.7'
+
+# Mail receiver
+export RECEIVER='support@jackiechen.org'
+
+# Sites use Cloudlets
+export MYSITES='www.jackiechen.org;blog.jackiechen.org'
+
