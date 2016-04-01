@@ -157,7 +157,7 @@ test_redirect()
 				for (( j=1; j<=$SUBTOTAL; j++  ))
 				do
 					JOB=$(sed -n ${j}p $site)
-					update_job_status $JOB "PRODUCTION-READY" $POLICYID
+					update_job_status $JOB "PRODUCTION" $POLICYID
 				done
 				rm -rf $site
 			fi
