@@ -19,7 +19,7 @@ Autosam treats every redirect as a job. And job has different status in its life
     
 ##Setup
 * Clone project.  
-..```bash
+```bash
 git clone https://github.com/jc1518/Autosam.git
 ```
 * Install dependencies. 
