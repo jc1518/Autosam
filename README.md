@@ -23,16 +23,12 @@ Autosam treats every redirect as a job. And job has different status in its life
 git clone https://github.com/jc1518/Autosam.git
 ```
 * Install dependencies. 
-- Cloudlets python module requires [edgegrid](https://github.com/akamai-open/AkamaiOPEN-edgegrid-python)
 ```bash
 pip install edgegrid-python
-```
-- jq 
-```bash
 sudo apt-get -y install jq
 or 
 sudo yum -y install jq
-``` 
+```
 * Create a AWS DynamoDB table for storing your job status.  
 
 * Create Cloudlets configs and associte them to properties. Ensure you follow a good naming convention. e.g www.jackiechen.org use www_jackiechen_prod as the Cloudlets config name. If you do it different, you have to update line 200 in autosam_v2.sh to fit your case.
@@ -43,17 +39,17 @@ POLICYNAME=$(echo "$JOB" | cut -d' ' -f1 | cut -d'/' -f3 | cut -d'.' -f1-2 | t  
 
 ##Usage
 Autosam supports two methods of submitting redirect jobs.
-* Slack bot
+* Slack bot    
 This requires to create a hubot and integrate it into Slack. The code can be found in myHubot repo. [lib/autosam.js](https://github.com/jc1518/myhubot/blob/master/lib/autosam.js) and [scripts/autosam.js](https://github.com/jc1518/myhubot/blob/master/scripts/autosam.js)
 ![autosam_bot](design/autosam_bot.png)
 
-* Text file
+* Text file    
 This a simple mode, just add all your redirects in a text file, one redirect per line. Then give it to autosam to process.
 ```bash
 ./autosam_v2.sh <file>
 ```  
 ##Redirect types
-Autosam supports both basic redirects and URL with query string. This can be extended to support more types in the [Cloudlets module](https://github.com/jc1518/Autosam/blob/master/Cloudlets/__init__.py)
+Autosam supports both basic URL redirects and URL with query string. This can be extended to support more types in the [Cloudlets module](https://github.com/jc1518/Autosam/blob/master/Cloudlets/__init__.py)
 
 
 
