@@ -13,9 +13,6 @@ export AWS_DEFAULT_OUTPUT='json'
 # DynamoDB table name
 export JOB_QUEUE='cloudlets-redirects'
 
-# Akamai Group ID
-export GROUP_ID='51000'
-
 # Python version
 export MYPYTHON='python2.7'
 

@@ -12,9 +12,12 @@ HEADER="import Cloudlets; s = Cloudlets.client(\"$CLD_BASEURL\",\"$CLD_CLIENTTOK
 # List cloudlets policy ID
 list_policy_id(){
 	echo ""
-	echo "Downloading policy ID..."
-	$MYPYTHON -c "$HEADER; print s.listPolicies($GROUP_ID)" | jq -r '.[] | "\(.name) \(.policyId)"' | sort > .temp.policy_ids
-	#cat .temp.policy_ids
+	echo "Downloading all policy ID, this will take a few minutes..."
+	for id in `$MYPYTHON -c "$HEADER; print s.listGroups()" | jq -r .[].groupId`
+	do
+		$MYPYTHON -c "$HEADER; print s.listPolicies(str($id))" >> .temp.allid
+	done
+	cat .temp.allid | jq -r '.[] | "\(.name) \(.policyId)"' | sort -u  > .temp.policy_id
 }
 
 # Read redirects job queue
