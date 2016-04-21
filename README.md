@@ -31,7 +31,7 @@ sudo yum -y install jq
 ```
 * Create a AWS DynamoDB table for storing your job status.  
 
-* Create Cloudlets configs and associte them to properties. Ensure you follow a good naming convention. e.g www.jackiechen.org use www_jackiechen_prod as the Cloudlets config name. If you do it different, you have to update line 200 in autosam_v2.sh to fit your case.
+* Create Cloudlets configs and associte them to properties. Ensure you follow a good naming convention. e.g www.jackiechen.org use www_jackiechen_prod as the Cloudlets config name. If you do it differently, you have to update the below line in autosam_v2.sh to fit your case.
 ```bash
 POLICYNAME=$(echo "$JOB" | cut -d' ' -f1 | cut -d'/' -f3 | cut -d'.' -f1-2 | t    r '.' '_')"_prod"
 ```      
@@ -44,7 +44,7 @@ This requires to create a hubot and integrate it into Slack. The code can be fou
 ![autosam_bot](design/autosam_bot.png)
 
 * Text file    
-This a simple mode, just add all your redirects in a text file, one redirect per line. Then give it to autosam to process.
+This allows you to do multiple redirects all in one go, just add all your redirects in a text file, one redirect per line. Then give it to autosam to process.
 ```bash
 # for adding new redirects
 ./autosam_v2.sh <file>
@@ -58,7 +58,7 @@ As Akamai takes a long time to propagate the configuration changes, it is a good
 ```bash
 0,30 08-17 * * 1-5 cd /home/autosam/cloudlets; ./all-in-one.sh >> log
 ```
-Akamai may deny your API call if the time in your machine is not correct. The best way to avoid that is to adjust your time before executing autosam. Here is a command you can use:
+Akamai will deny your API calls if the time in your machine is not correct. The best way to avoid that is to adjust your time before executing autosam. Here is a command you can use:
 ```bash
 sudo date -s "$(curl -sD - google.com | grep '^Date:' | cut -d' ' -f3-6)Z"
 ```
