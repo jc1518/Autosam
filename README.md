@@ -35,7 +35,7 @@ sudo yum -y install jq
 ```bash
 POLICYNAME=$(echo "$JOB" | cut -d' ' -f1 | cut -d'/' -f3 | cut -d'.' -f1-2 | t    r '.' '_')"_prod"
 ```      
-* Setup your credentials in the [config](config) file, you need credentials for both Cloudlets API and AWS DynamoDB API calls. Also replace sample value with your Akamai Group ID, email address, sites ... 
+* Setup your credentials in the [config](config) file, you need credentials for both Cloudlets API and AWS DynamoDB API calls. Also replace sample value with your email address, sites ... 
 
 ##Usage
 Autosam supports two methods of submitting redirect jobs.
