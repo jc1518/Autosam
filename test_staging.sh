@@ -99,7 +99,7 @@ test_redirect()
 		NEWVERSION=$(echo $site  | cut -d'.' -f4)
 		OLDPRODVERSION=$(echo $site  | cut -d'.' -f5)
 		check_policy_status
-		if [ $STAGPOLICYSTATUS == "pending" ]
+		if [[ "$STAGPOLICYSTATUS" == *"pending" ]]
 		then
 			echo "The staging configuration is in pending status, skip this job for now"
 			continue

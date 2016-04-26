@@ -27,7 +27,7 @@ check_production_job()
 		PJOB=$(echo $JOB | awk {'print $1 " " $2'})
 		POLICYID=$(echo $JOB | awk {'print $3'})
 		check_policy_status
-		if [ "$PRODPOLICYSTATUS" == "pending" ]
+		if [[ "$PRODPOLICYSTATUS" == *"pending" ]]
 		then
 			echo "The production configuration is in pending status, skip this job for now"
 			continue
