@@ -1,23 +1,23 @@
-#Autosam
+# Autosam
 
-##Description
+## Description
 Autosam is a project that I created to automate the Akamai Cloudlets Edge Redirect from end to end, including add new rules, remove duplicated rules if there are any, push to staging, test in staging, push to production, test in production.     
 
-##Design
+## Design
 Autosam is written in Bash and Python, and it utilizes a few technologies: [slack](https://slack.com/), [hubot](https://hubot.github.com/), [AWS DynamoDB](https://aws.amazon.com/documentation/dynamodb/) and [Cloudlets API](https://developer.akamai.com/api/luna/cloudlets/overview.html).
 
 Here is the high level architecture
 ![architecture](design/autosam_architecture.png)
 
-##Workflow
+## Workflow
 Here is the detailed workflow design
 ![workflow](design/autosam_v2_workflow.png)
 
-##Lifecycle
+## Lifecycle
 Autosam treats every redirect as a job. And job has different status in its lifecycle.  
 ![lifecycle](design/redirect_job_lifecycle.png)  
     
-##Setup
+## Setup
 * Clone project.  
 ```bash
 git clone https://github.com/jc1518/Autosam.git
@@ -37,7 +37,7 @@ POLICYNAME=$(echo "$JOB" | cut -d' ' -f1 | cut -d'/' -f3 | cut -d'.' -f1-2 | t  
 ```      
 * Setup your credentials in the [config](config) file, you need credentials for both Cloudlets API and AWS DynamoDB API calls. Also replace sample value with your email address, sites ... 
 
-##Usage
+## Usage
 Autosam supports two methods of submitting redirect jobs.
 * Slack bot    
 This requires to create a hubot and integrate it into Slack. The code can be found in myHubot repo. [lib/autosam.js](https://github.com/jc1518/myhubot/blob/master/lib/autosam.js) and [scripts/autosam.js](https://github.com/jc1518/myhubot/blob/master/scripts/autosam.js)
@@ -53,7 +53,7 @@ This allows you to do multiple redirects all in one go, just add all your redire
 ./test_staging.sh  
 ./test_production.sh  
 ```  
-##Best practice
+## Best practice
 As Akamai takes a long time to propagate the configuration changes, it is a good idea to consolidate as many redirects as possible into one go. In my environment, I created a cron job to run every 30 minutes. And users submit the redirect jobs via talking to the Slack bot that is shown above.    
 ```bash
 0,30 08-17 * * 1-5 cd /home/autosam/cloudlets; ./all-in-one.sh >> log
