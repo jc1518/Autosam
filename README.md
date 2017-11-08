@@ -63,7 +63,7 @@ Akamai will deny your API calls if the time in your machine is not correct. The 
 sudo date -s "$(curl -sD - google.com | grep '^Date:' | cut -d' ' -f3-6)Z"
 ```
 
-##Redirect types
+## Redirect types
 Autosam supports both basic URL redirects and URL with query string. This can be extended to support more types in the [Cloudlets module](https://github.com/jc1518/Autosam/blob/master/Cloudlets/__init__.py)
 
 
